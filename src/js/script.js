@@ -78,26 +78,26 @@
       /* START: click event listener to trigger */
       clickedElement.addEventListener('click' , function() {
         /* prevent default action for event */
-      event.preventDefault();
-      /* toggle active class on element of thisProduct */
-      clickedElement.classList.toggle('active');
-      /* find all active products */
-      const activeProducts = document.querySelectorAll('.product.active');
-      console.log('activeProducts: ', activeProducts);
-      /* START LOOP: for each active product */
-      for(let activeProduct of activeProducts) {
-        /* START: if the active product isn't the element of thisProduct */
-        if(activeProduct !== clickedElement) {
-          /* remove class active for the active product */
-          activeProduct.classList.remove('active');
-        /* END: if the active product isn't the element of thisProduct */
+        event.preventDefault();
+        /* toggle active class on element of thisProduct */
+        clickedElement.classList.toggle('active');
+        /* find all active products */
+        const activeProducts = document.querySelectorAll('.product.active');
+        console.log('activeProducts: ', activeProducts);
+        /* START LOOP: for each active product */
+        for(let activeProduct of activeProducts) {
+          /* START: if the active product isn't the element of thisProduct */
+          if(activeProduct !== clickedElement) {
+            /* remove class active for the active product */
+            activeProduct.classList.remove('active');
+          /* END: if the active product isn't the element of thisProduct */
+          }
+        /* END LOOP: for each active product */
         }
-      /* END LOOP: for each active product */
-      }
-    /* END: click event listener to trigger */
-    });
+      /* END: click event listener to trigger */
+      });
+    }
   }
-}
 
 
 
