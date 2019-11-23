@@ -131,24 +131,24 @@
       const thisProduct = this;
       console.log('processOrder');
       /* read all data from the form (using utils.serializeFormToObject) and save it to const formData */
-      console.log('___________________PRODUCT____', thisProduct);
+      // console.log('___________________PRODUCT____', thisProduct);
       const formData = utils.serializeFormToObject(thisProduct.form);
-      console.log('formData: ', formData);
+      // console.log('formData: ', formData);
       /* set variable price to equal thisProduct.data.price */
       let price = thisProduct.data.price;
-      console.log('price: ', price );
+      // console.log('price: ', price );
       /* START LOOP: for each paramId in thisProduct.data.params */
       for (let paramId in thisProduct.data.params) {
-        console.log('paramId: ', paramId );
+        // console.log('paramId: ', paramId );
         /* save the element in thisProduct.data.params with key paramId as const param */
         const param = thisProduct.data.params[paramId];
-        console.log('param: ', param);
+        // console.log('param: ', param);
         /* START LOOP: for each optionId in param.options */
         for (let optionId in param.options) {
-          console.log('optionId: ', optionId );
+          // console.log('optionId: ', optionId );
           /* save the element in param.options with key optionId as const option */
           const option = param.options[optionId];
-          console.log('Option: ', option );
+          // console.log('Option: ', option );
           /* START IF: if option is selected and option is not default */
           const optionSelected = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1;
           console.log('optionSelected: ', optionSelected );
@@ -164,10 +164,17 @@
             /* END ELSE IF: if option is not selected and option is default */
           }
           /* END LOOP: for each optionId in param.options */
-          const imageWrapper = thisProduct.imageWrapper; // eslint-disable-line no-unused-vars
-          if (optionSelected) {
-            thisProduct.imageWrapper.classList.add(classNames.menuProduct.imageVisible);
-          } else { thisProduct.imageWrapper.classList.remove(classNames.menuProduct.imageVisible);
+          const imageWrapper = thisProduct.imageWrapper;
+
+          console.log('paramId: ', paramId);
+          console.log('optionId: ', optionId);
+          for(let image of imageWrapper.children) {
+            if (image.classList.contains(paramId + '-' + optionId)) {
+              if (optionSelected) {
+                image.classList.add('active')
+              }
+              else {image.classList.remove('active')}
+            }
           }
         }
       }
