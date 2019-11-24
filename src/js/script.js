@@ -171,9 +171,10 @@
           for(let image of imageWrapper.children) {
             if (image.classList.contains(paramId + '-' + optionId)) {
               if (optionSelected) {
-                image.classList.add('active')
+                image.classList.add('active');
               }
-              else {image.classList.remove('active')}
+              else {image.classList.remove('active');
+              }
             }
           }
         }
