@@ -175,7 +175,8 @@
               if (optionSelected) {
                 image.classList.add('active');
               }
-              else {image.classList.remove('active');
+              else { 
+                image.classList.remove('active');
               }
             }
           }
@@ -217,7 +218,6 @@
     }
     setValue(value) {
       const thisWidget = this;
-
       const newValue = parseInt(value);
 
       //TODO: Add validation
