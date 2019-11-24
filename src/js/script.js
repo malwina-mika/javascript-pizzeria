@@ -33,7 +33,6 @@
     },
   };
 
-  /* eslint-disable */
   const classNames = {
     menuProduct: {
       wrapperActive: 'active',
@@ -48,7 +47,7 @@
       defaultMax: 9,
     }
   };
-  /* eslint-enable */
+
   const templates = {
     menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
   };
@@ -200,6 +199,7 @@
     constructor(element) {
       const thisWidget = this;
       thisWidget.getElements(element);
+      thisWidget.value = settings.amountWidget.defaultValue;
       thisWidget.setValue(thisWidget.input.value);
       thisWidget.initActions(thisWidget.input.value);
 
@@ -222,10 +222,13 @@
 
       //TODO: Add validation
 
-      thisWidget.value = newValue;
-      console.log('thisWidget.value: ', thisWidget.value);
-      thisWidget.announce();
+      if(newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax) {
+        thisWidget.value = newValue;
+        thisWidget.announce();
+      }
+
       thisWidget.input.value = thisWidget.value;
+
       console.log('thisWidget.input.value: ', thisWidget.input.value);
     }
     initActions() {
