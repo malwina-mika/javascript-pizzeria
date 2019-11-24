@@ -33,6 +33,7 @@
     },
   };
 
+  /* eslint-disable */
   const classNames = {
     menuProduct: {
       wrapperActive: 'active',
@@ -47,13 +48,13 @@
       defaultMax: 9,
     }
   };
-
+  /* eslint-enable */
   const templates = {
     menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
   };
 
   class Product {
-    constructor(id, data){
+    constructor(id, data) {
       const thisProduct = this;
       thisProduct.id = id;
       thisProduct.data = data;
@@ -61,17 +62,18 @@
       thisProduct.getElements();
       thisProduct.initAccordion();
       thisProduct.initOrderForm();
+      thisProduct.initAmountWidget();
       thisProduct.processOrder();
-      console.log('new Product: ', thisProduct);
+      // console.log('new Product: ', thisProduct);
     }
-    renderInMenu(){
+    renderInMenu() {
       const thisProduct = this;
       const generatedHTML = templates.menuProduct(thisProduct.data);
       thisProduct.element = utils.createDOMFromHTML(generatedHTML);
       const menuContainer = document.querySelector(select.containerOf.menu);
       menuContainer.appendChild(thisProduct.element);
     }
-    getElements(){
+    getElements() {
       const thisProduct = this;
       thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
       thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
@@ -79,13 +81,14 @@
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
       thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
+      thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
     }
-    initAccordion(){
+    initAccordion() {
       const thisProduct = this;
-      console.log('Link was clicked!' + thisProduct);
+      // console.log('Link was clicked!' + thisProduct);
       /* find the clickable trigger (the element that should react to clicking) */
       const clickedElement = thisProduct.accordionTrigger;
-      console.log('clickedElement/ this.element', clickedElement);
+      // console.log('clickedElement/ this.element', clickedElement);
       /* START: click event listener to trigger */
       clickedElement.addEventListener('click' , function(event) {
         /* prevent default action for event */
@@ -94,7 +97,7 @@
         thisProduct.element.classList.toggle('active');
         /* find all active products */
         const activeProducts = document.querySelectorAll(select.all.menuProductsActive);
-        console.log('activeProducts: ', activeProducts);
+        // console.log('activeProducts: ', activeProducts);
         /* START LOOP: for each active product */
         for(let activeProduct of activeProducts) {
           /* START: if the active product isn't the element of thisProduct */
@@ -110,26 +113,26 @@
     }
     initOrderForm() {
       const thisProduct = this; // eslint-disable-line no-unused-vars
-      console.log('initOrderForm');
+      // console.log('initOrderForm');
       thisProduct.form.addEventListener('submit', function(event){
         event.preventDefault();
         thisProduct.processOrder();
       });
 
-      for(let input of thisProduct.formInputs){
-        input.addEventListener('change', function(){
+      for(let input of thisProduct.formInputs) {
+        input.addEventListener('change', function() {
           thisProduct.processOrder();
         });
       }
 
-      thisProduct.cartButton.addEventListener('click', function(event){
+      thisProduct.cartButton.addEventListener('click', function(event) {
         event.preventDefault();
         thisProduct.processOrder();
       });
     }
     processOrder() {
       const thisProduct = this;
-      console.log('processOrder');
+      // console.log('processOrder');
       /* read all data from the form (using utils.serializeFormToObject) and save it to const formData */
       // console.log('___________________PRODUCT____', thisProduct);
       const formData = utils.serializeFormToObject(thisProduct.form);
@@ -151,7 +154,7 @@
           // console.log('Option: ', option );
           /* START IF: if option is selected and option is not default */
           const optionSelected = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1;
-          console.log('optionSelected: ', optionSelected );
+          // console.log('optionSelected: ', optionSelected );
           if (optionSelected && !option.default) {
             /* add price of option to variable price */
             price += option.price;
@@ -166,8 +169,8 @@
           /* END LOOP: for each optionId in param.options */
           const imageWrapper = thisProduct.imageWrapper;
 
-          console.log('paramId: ', paramId);
-          console.log('optionId: ', optionId);
+          // console.log('paramId: ', paramId);
+          // console.log('optionId: ', optionId);
           for(let image of imageWrapper.children) {
             if (image.classList.contains(paramId + '-' + optionId)) {
               if (optionSelected) {
@@ -182,14 +185,71 @@
       /* END LOOP: for each paramId in thisProduct.data.params */
       /* set the contents of thisProduct.priceElem to be the value of variable price */
       thisProduct.priceElem.innerHTML = price;
-      console.log('final price: ', price);
+      // console.log('final price: ', price);
+    }
+    initAmountWidget() {
+      const thisProduct = this;
+      thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
     }
   }
+
+  class AmountWidget {
+    constructor(element) {
+      const thisWidget = this;
+      thisWidget.getElements(element);
+      thisWidget.setValue(thisWidget.input.value);
+      thisWidget.initActions(thisWidget.input.value);
+
+      console.log('amountWidget: ', thisWidget);
+      console.log('construktor arguments: ', element);
+
+    }
+    getElements(element) {
+      const thisWidget = this;
+
+      thisWidget.element = element;
+      thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input);
+      thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
+      thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
+    }
+    setValue(value) {
+      const thisWidget = this;
+
+      const newValue = parseInt(value);
+
+      //TODO: Add validation
+
+      thisWidget.value = newValue;
+      console.log('thisWidget.value: ', thisWidget.value);
+      thisWidget.input.value = thisWidget.value;
+      console.log('thisWidget.input.value: ', thisWidget.input.value);
+    }
+    initActions() {
+      const thisWidget = this;
+      // console.log('initOrderForm');
+      thisWidget.input.addEventListener('change', function(){
+        event.preventDefault();
+        thisWidget.setValue(thisWidget.input.value);
+      });
+
+      thisWidget.linkDecrease.addEventListener('click', function(event){
+        event.preventDefault();
+        thisWidget.setValue(thisWidget.value - 1);
+      });
+      thisWidget.linkIncrease.addEventListener('click', function(event){
+        event.preventDefault();
+        thisWidget.setValue(thisWidget.value + 1);
+      });
+
+    }
+  
+  }
+
 
   const app = {
     initMenu: function() {
       const thisApp = this;
-      console.log('thisApp.data: ', thisApp.data);
+      // console.log('thisApp.data: ', thisApp.data);
       for(let productData in thisApp.data.products){
         new Product(productData, thisApp.data.products[productData]);
       }
@@ -202,11 +262,11 @@
 
     init: function(){
       const thisApp = this;
-      console.log('*** App starting ***');
-      console.log('thisApp:', thisApp);
-      console.log('classNames:', classNames);
-      console.log('settings:', settings);
-      console.log('templates:', templates);
+      // console.log('*** App starting ***');
+      // console.log('thisApp:', thisApp);
+      // console.log('classNames:', classNames);
+      // console.log('settings:', settings);
+      // console.log('templates:', templates);
 
       thisApp.initData();
       thisApp.initMenu();
