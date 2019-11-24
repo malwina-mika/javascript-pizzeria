@@ -33,7 +33,7 @@
     },
   };
 
-  const classNames = {
+  const classNames = { // eslint-disable-line no-unused-vars
     menuProduct: {
       wrapperActive: 'active',
       imageVisible: 'active',
@@ -93,7 +93,7 @@
         /* prevent default action for event */
         event.preventDefault();
         /* toggle active class on element of thisProduct */
-        thisProduct.element.classList.toggle('active');
+        thisProduct.element.classList.toggle(classNames.menuProduct.imageVisible);
         /* find all active products */
         const activeProducts = document.querySelectorAll(select.all.menuProductsActive);
         // console.log('activeProducts: ', activeProducts);
@@ -102,7 +102,7 @@
           /* START: if the active product isn't the element of thisProduct */
           if(activeProduct !== thisProduct.element) {
             /* remove class active for the active product */
-            activeProduct.classList.remove('active');
+            activeProduct.classList.remove(classNames.menuProduct.imageVisible);
             /* END: if the active product isn't the element of thisProduct */
           }
           /* END LOOP: for each active product */
@@ -173,10 +173,10 @@
           for(let image of imageWrapper.children) {
             if (image.classList.contains(paramId + '-' + optionId)) {
               if (optionSelected) {
-                image.classList.add('active');
+                image.classList.add(classNames.menuProduct.wrapperActive);
               }
-              else { 
-                image.classList.remove('active');
+              else {
+                image.classList.remove(classNames.menuProduct.wrapperActive);
               }
             }
           }
