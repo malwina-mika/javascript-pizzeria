@@ -221,6 +221,7 @@
 
       thisWidget.value = newValue;
       console.log('thisWidget.value: ', thisWidget.value);
+      thisWidget.announce();
       thisWidget.input.value = thisWidget.value;
       console.log('thisWidget.input.value: ', thisWidget.input.value);
     }
@@ -242,7 +243,12 @@
       });
 
     }
-  
+    announce() {
+      const thisWidget = this;
+
+      const event = new Event('updated');
+      thisWidget.element.dispatchEvent(event);
+    }
   }
 
 
