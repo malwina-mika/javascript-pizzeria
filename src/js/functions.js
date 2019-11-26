@@ -38,8 +38,8 @@ utils.serializeFormToObject = function(form){
 
 utils.convertDataSourceToDbJson = function(){
   const productJson = [];
-  for(let key in dataSource.products){
-    productJson.push(Object.assign({id: key}, dataSource.products[key]));
+  for(let key in dataSource.products){ // eslint-disable-line no-undef
+    productJson.push(Object.assign({id: key}, dataSource.products[key])); // eslint-disable-line  no-undef
   }
 
   console.log(JSON.stringify({product: productJson, order: []}, null, '  '));
