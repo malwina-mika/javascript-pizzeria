@@ -180,7 +180,7 @@
         // console.log('paramId: ', paramId );
         /* save the element in thisProduct.data.params with key paramId as const param */
         const param = thisProduct.data.params[paramId];
-        console.log('param: ', param);
+        // console.log('param: ', param);
         /* START LOOP: for each optionId in param.options */
         for (let optionId in param.options) {
           // console.log('optionId: ', optionId );
@@ -204,8 +204,8 @@
           /* END LOOP: for each optionId in param.options */
           const imageWrapper = thisProduct.imageWrapper;
 
-          console.log('paramId: ', paramId);
-          console.log('optionId: ', optionId);
+          // console.log('paramId: ', paramId);
+          // console.log('optionId: ', optionId);
           for(let image of imageWrapper.children) {
             if (image.classList.contains(paramId + '-' + optionId)) {
               if (optionSelected) {
@@ -216,7 +216,7 @@
                   };
                 }
                 thisProduct.params[paramId].options[optionId] = option.label;
-                console.log('thisProduct.params: ', thisProduct.params);
+                // console.log('thisProduct.params: ', thisProduct.params);
                 image.classList.add(classNames.menuProduct.imageVisible);
               }
               else {
@@ -247,7 +247,7 @@
 
       thisProduct.name = thisProduct.data.name;
       thisProduct.amount = thisProduct.amountWidget.value;
-      console.log('thisProduct-add to Cart: ', thisProduct);
+      // console.log('thisProduct-add to Cart: ', thisProduct);
       app.cart.add(thisProduct);
 
     }
@@ -338,10 +338,40 @@
     add(menuProduct) {
       const thisCart = this;
       const generatedHTML = templates.cartProduct(menuProduct);
-      const generateDOM = utils.createDOMFromHTML(generatedHTML);
-      thisCart.dom.productList.appendChild(generateDOM);
+      const generatedDOM = utils.createDOMFromHTML(generatedHTML);
+      thisCart.dom.productList.appendChild(generatedDOM);
       console.log('adding product', menuProduct);
+      thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
     }
+  }
+
+  class CartProduct {
+    constructor(menuProduct, element) {
+      const thisCartProduct = this;
+      thisCartProduct.id = menuProduct.id;
+      thisCartProduct.name = menuProduct.name;
+      thisCartProduct.price = menuProduct.price;
+      thisCartProduct.priceSingle = menuProduct.priceSingle;
+      thisCartProduct.amount = menuProduct.amount;
+      thisCartProduct.params = JSON.parse(JSON.stringify(menuProduct.params));
+
+      thisCartProduct.getElements(element);
+      
+      console.log('new Cart Product: ', thisCartProduct);
+    }
+    getElements(element) {
+      const thisCartProduct = this;
+      thisCartProduct.dom = {};
+
+      thisCartProduct.dom.wrapper = element;
+      thisCartProduct.dom.amountWidget = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.amountWidget);
+      thisCartProduct.dom.price = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.price);
+      thisCartProduct.dom.edit = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.edit);
+      thisCartProduct.dom.remove = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.remove);
+
+
+    }
+
   }
 
   const app = {
