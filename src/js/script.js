@@ -161,6 +161,7 @@
       thisProduct.cartButton.addEventListener('click', function(event) {
         event.preventDefault();
         thisProduct.processOrder();
+        thisProduct.addToCart();
       });
     }
     processOrder() {
@@ -170,6 +171,7 @@
       // console.log('___________________PRODUCT____', thisProduct);
       const formData = utils.serializeFormToObject(thisProduct.form);
       // console.log('formData: ', formData);
+      thisProduct.params = {};
       /* set variable price to equal thisProduct.data.price */
       let price = thisProduct.data.price;
       // console.log('price: ', price );
@@ -178,7 +180,7 @@
         // console.log('paramId: ', paramId );
         /* save the element in thisProduct.data.params with key paramId as const param */
         const param = thisProduct.data.params[paramId];
-        // console.log('param: ', param);
+        console.log('param: ', param);
         /* START LOOP: for each optionId in param.options */
         for (let optionId in param.options) {
           // console.log('optionId: ', optionId );
@@ -202,22 +204,34 @@
           /* END LOOP: for each optionId in param.options */
           const imageWrapper = thisProduct.imageWrapper;
 
-          // console.log('paramId: ', paramId);
-          // console.log('optionId: ', optionId);
+          console.log('paramId: ', paramId);
+          console.log('optionId: ', optionId);
           for(let image of imageWrapper.children) {
             if (image.classList.contains(paramId + '-' + optionId)) {
               if (optionSelected) {
-                image.classList.add(classNames.menuProduct.wrapperActive);
+                if(!thisProduct.params[paramId]) {
+                  thisProduct.params[paramId] = {
+                    label: param.label,
+                    options: {},
+                  };
+                }
+                thisProduct.params[paramId].options[optionId] = option.label;
+                console.log('thisProduct.params: ', thisProduct.params);
+                image.classList.add(classNames.menuProduct.imageVisible);
               }
               else {
-                image.classList.remove(classNames.menuProduct.wrapperActive);
+                image.classList.remove(classNames.menuProduct.imageVisible);
               }
             }
           }
         }
       }
-      price *= thisProduct.amountWidget.value;
-      thisProduct.priceElem.innerHTML = price;
+      /* multiply price by amount */
+      thisProduct.priceSingle = price;
+      thisProduct.price = thisProduct.priceSingle * thisProduct.amountWidget.value;
+
+      /* set the contents of thisProduct.priceElem to be the value of variable price */
+      thisProduct.priceElem.innerHTML = thisProduct.price;
       // console.log('final price: ', price);
     }
     initAmountWidget() {
@@ -227,6 +241,11 @@
         event.preventDefault();
         thisProduct.processOrder();
       });
+    }
+    addToCart() {
+      const thisProduct = this;
+      app.cart.add(thisProduct);
+    
     }
   }
 
@@ -311,6 +330,10 @@
       thisCart.dom.toggleTrigger.addEventListener('click' , function() {
         thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
       });
+    }
+    add(menuProduct) {
+      // const thisCart = this;
+      console.log('adding product', menuProduct);
     }
   }
 
