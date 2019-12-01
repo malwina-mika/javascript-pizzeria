@@ -374,7 +374,7 @@
     sendOrder() {
       const thisCart = this;
       const url = settings.db.url + '/' + settings.db.order;
-        console.log('adress', thisCart.dom.address);
+      console.log('adress', thisCart.dom.address);
       const payload = {
 
         products: [],
@@ -385,11 +385,11 @@
         subtotalPrice: thisCart.subtotalPrice,
         deliveryFee: 20,
       };
-        console.log('thisCart product: ', thisCart.products);
-        for(let product of thisCart.products) {
-          console.log('product: ', product);
-          payload.products.push(product.getData());
-        }
+      console.log('thisCart product: ', thisCart.products);
+      for(let product of thisCart.products) {
+        console.log('product: ', product);
+        payload.products.push(product.getData());
+      }
 
       const options = {
         method: 'POST',
