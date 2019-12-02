@@ -2,6 +2,10 @@
 
 .btn-primary {
   @include btn($color-dark, $color-light, $color-dark);
+
+  &:active {
+    transform: scale(1.1, 1.1);
+  }
 }
 
 .btn-secondary {

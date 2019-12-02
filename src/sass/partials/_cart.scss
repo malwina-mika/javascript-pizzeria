@@ -2,7 +2,7 @@
   position: fixed;
   width: 300px; // CODE CHANGED
   right: 0;
-  margin-right: 50px;
+  margin-right: 40px;
   top: $base-size;
   padding: ($base-size) ($base-size * 1.5);
   background: $color-light;
@@ -12,13 +12,15 @@
   box-shadow: 0 0 $base-size rgba(0, 0, 0, 0.2);
   z-index: 9999;
 
-
   &.active {
     .cart__content {
       @include accordion-open();
       padding: ($base-size * 1.5) 0 0 0;
     }
+  }
 
+  &.pulse {
+    animation: pulse 0.5s ease-in-out;
   }
 
   &__summary {
@@ -158,4 +160,18 @@
 
   }
 
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1, 1);
+  }
+
+  50% {
+    transform: scale(1.1, 1.1);
+  }
+
+  to {
+    transform: scale(1, 1);
+  }
 }
