@@ -1,7 +1,8 @@
 .cart {
-  position: absolute;
+  position: fixed;
   width: 300px; // CODE CHANGED
   right: 0;
+  margin-right: 50px;
   top: $base-size;
   padding: ($base-size) ($base-size * 1.5);
   background: $color-light;
@@ -10,6 +11,7 @@
   font-size: $base-size;
   box-shadow: 0 0 $base-size rgba(0, 0, 0, 0.2);
   z-index: 9999;
+
 
   &.active {
     .cart__content {
