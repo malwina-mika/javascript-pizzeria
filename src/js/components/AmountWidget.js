@@ -1,6 +1,6 @@
 import {settings, select} from '../settings.js';
 
-class AmountWidget {
+export class AmountWidget {
   constructor(element) {
     const thisWidget = this;
     thisWidget.getElements(element);
@@ -66,6 +66,3 @@ class AmountWidget {
     thisWidget.element.dispatchEvent(event);
   }
 }
-
-
-export default AmountWidget;
