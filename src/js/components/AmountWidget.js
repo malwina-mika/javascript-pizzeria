@@ -3,13 +3,11 @@ import {settings, select} from '../settings.js';
 export class AmountWidget {
   constructor(element) {
     const thisWidget = this;
+
     thisWidget.getElements(element);
     thisWidget.value = settings.amountWidget.defaultValue;
     thisWidget.setValue(thisWidget.input.value);
     thisWidget.initActions(thisWidget.input.value);
-
-    // console.log('amountWidget: ', thisWidget);
-    // console.log('construktor arguments: ', element);
 
   }
 
@@ -35,7 +33,6 @@ export class AmountWidget {
 
     thisWidget.input.value = thisWidget.value;
 
-    // console.log('thisWidget.input.value: ', thisWidget.input.value);
   }
 
   initActions() {
