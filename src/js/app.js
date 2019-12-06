@@ -38,19 +38,26 @@ const app = {
     }
   },
 
-  activatePage: function(pageId){
+  activatePage: function(pageId) {
     const thisApp = this;
     /* add class "active" to matching pages, remove from non-matching*/
-    for(let page of thisApp.pages){
+    for(let page of thisApp.pages) {
       page.classList.toggle(classNames.pages.active, page.id == pageId);
     }
     /* add class "active" to matching links, remove from non-matching*/
-    for(let link of thisApp.navLinks){
+    for(let link of thisApp.navLinks) {
       link.classList.toggle(
         classNames.nav.active,
         link.getAttribute('href') == '#' + pageId
       );
     }
+
+  },
+
+  initBooking: function() {
+    const thisApp = this;
+    const bookingWidgetContainer = document.querySelector(select.containerOf.booking);
+    thisApp.booking = new Booking(bookingWidgetContainer);
 
   },
 
@@ -103,6 +110,7 @@ const app = {
     thisApp.initPages();
     thisApp.initData();
     thisApp.initCart();
+    thisApp.initBooking();
   },
 };
 
