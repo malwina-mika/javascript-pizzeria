@@ -91,11 +91,8 @@ export class Product {
 
   addPulse() {
     let cartSelector = document.querySelector('.cart');
-    console.log('CartSelector', cartSelector);
     cartSelector.classList.add('pulse');
-    let pulseCart = document.querySelector('.pulse');
-    console.log('PulseCart', pulseCart);
-    window.setTimeout(function(){pulseCart.classList.remove('pulse');}, 500, true);
+    window.setTimeout(function(){cartSelector.classList.remove('pulse');}, 500, true);
   }
 
   processOrder() {
