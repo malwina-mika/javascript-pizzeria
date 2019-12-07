@@ -13,7 +13,7 @@ export class AmountWidget extends BaseWidget{
 
     thisWidget.renderValue();
 
-    console.log('amountWidget', thisWidget);
+    // console.log('amountWidget', thisWidget);
   }
 
   getElements() {

@@ -7,7 +7,7 @@ export class DatePicker extends BaseWidget{
     super(wrapper, utils.dateToStr(new Date()));
 
     const thisWidget = this;
-
+    console.log('Date- this.value', thisWidget.value);
     thisWidget.dom.input = thisWidget.dom.wrapper.querySelector(select.widgets.datePicker.input);
 
     thisWidget.initPlugin();
@@ -28,19 +28,19 @@ export class DatePicker extends BaseWidget{
       },
       disable: [
         function(date) {
-            // return true to disable
-            return (date.getDay() === 1);
+          // return true to disable
+          return (date.getDay() === 1);
         },
       ],
       onChange: function(dateStr) {
-         thisWidget.value = dateStr;
+        thisWidget.value = dateStr;
       },
+    };
+
+    // eslint-disable-next-line no-undef
+    flatpickr(thisWidget.dom.input, options);
 
   }
-
-  flatpickr(thisWidget.dom.input, options);
-
-}
 
   parseValue(value) {
     return value;
