@@ -99,7 +99,27 @@ export class Booking {
     console.log('thisBooking.booked', thisBooking.booked);
   }
 
-  
+  makeBooked(date, hour, duration, table) {
+    const thisBooking = this;
+
+    if(typeof thisBooking.booked[date] == 'undefined') {
+      thisBooking.booked[date] = {};
+    }
+
+    const startHour = utils.hourToNumber(hour);
+
+    for(let hourBlock = startHour; hourBlock < startHour + duration; hourBlock += 0.5) {
+
+      if(typeof thisBooking.booked[date][hourBlock] == 'undefined') {
+        thisBooking.booked[date][hourBlock] = [];
+      }
+
+      thisBooking.booked[date][startHour].push(table);
+
+
+      console.log('loop', hourBlock);
+    }
+  }
 
   render(element) {
     const thisBooking = this;
