@@ -206,27 +206,27 @@
   "event": [
     {
       "id": 1,
-      "date": "2019-10-15",
+      "date": "2019-12-15",
       "hour": "12:30",
       "table": 1,
       "repeat": false,
-      "duration": 8,
+      "duration": 4,
       "ppl": 3,
       "starters": []
     },
     {
       "id": 2,
-      "date": "2019-10-15",
+      "date": "2019-12-15",
       "hour": "13:00",
       "table": 3,
-      "repeat": false,
+      "repeat": "daily",
       "duration": 6,
       "ppl": 3,
       "starters": ["bread", "lemonWater"]
     },
     {
       "id": 3,
-      "date": "2019-10-15",
+      "date": "2019-12-18",
       "hour": "12:00",
       "table": 2,
       "repeat": false,
@@ -236,5 +236,15 @@
     }
 
   ],
-  "booking":[]
+  "booking":[
+    {
+      "id": 1,
+      "date": "2019-12-13",
+      "hour": "16:00",
+      "table": 1,
+      "duration": 3,
+      "ppl": 4,
+      "starters": ["water"]
+    }
+  ]
 }
