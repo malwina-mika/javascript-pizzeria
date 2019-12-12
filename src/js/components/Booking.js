@@ -123,38 +123,38 @@ export class Booking {
     }
   }
 
-  initActions(){
-   const thisBooking = this;
+  initActions() {
+    const thisBooking = this;
 
-   const tableBookedClass = classNames.booking.tableBooked;
-   const tableSelectedClass = classNames.booking.tableSelected;
+    const tableBookedClass = classNames.booking.tableBooked;
+    const tableSelectedClass = classNames.booking.tableSelected; //eslint-disable-line no-unused-vars
 
-   for(let table of thisBooking.dom.tables) {
-     table.addEventListener('click', function(){
-       // console.log('table', table);
-       if(!table.classList.contains(tableBookedClass)) {
-           table.classList.add(tableBookedClass);
-           thisBooking.tableId = table.getAttribute(settings.booking.tableIdAttribute);
-       }
+    for(let table of thisBooking.dom.tables) {
+      table.addEventListener('click', function(){
+        // console.log('table', table);
+        if(!table.classList.contains(tableBookedClass)) {
+          table.classList.add(tableBookedClass);
+          thisBooking.tableId = table.getAttribute(settings.booking.tableIdAttribute);
+        }
         else {
-         return console.log('table is already booked');
-       }
-       })
-   }
+          return console.log('table is already booked');
+        }
+      });
+    }
 
-   thisBooking.dom.hourPicker.addEventListener('input', function(){
-     thisBooking.updateDOM();
-   });
+    thisBooking.dom.hourPicker.addEventListener('input', function(){
+      thisBooking.updateDOM();
+    });
 
-   thisBooking.dom.formBooking.addEventListener('submit', function(event) {
-     event.preventDefault();
-     thisBooking.sendOrder();
+    thisBooking.dom.formBooking.addEventListener('submit', function(event) {
+      event.preventDefault();
+      thisBooking.sendOrder();
 
-     thisBooking.updateDOM();
+      thisBooking.updateDOM();
 
-   });
+    });
 
- }
+  }
 
   sendOrder() {
     const thisBooking = this;
@@ -162,39 +162,39 @@ export class Booking {
     const url = settings.db.url + '/' + settings.db.booking;
 
     const payload = {
-        date: thisBooking.datePicker.value,
-        hour: thisBooking.hourPicker.value,
-        table: thisBooking.tableId,
-        duration: thisBooking.hoursAmount.value,
-        ppl: thisBooking.peopleAmount.value,
-        starters: [],
-        phone: thisBooking.dom.phone.value,
-        address: thisBooking.dom.address.value,
+      date: thisBooking.datePicker.value,
+      hour: thisBooking.hourPicker.value,
+      table: thisBooking.tableId,
+      duration: thisBooking.hoursAmount.value,
+      ppl: thisBooking.peopleAmount.value,
+      starters: [],
+      phone: thisBooking.dom.phone.value,
+      address: thisBooking.dom.address.value,
 
-      };
+    };
 
 
-      for (let starter of thisBooking.dom.starters) {
-        if (starter.checked == true) {
-          payload.starters.push(starter.value);
-        }
+    for (let starter of thisBooking.dom.starters) {
+      if (starter.checked == true) {
+        payload.starters.push(starter.value);
       }
+    }
 
-      const options = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      };
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    };
 
-      fetch(url, options)
-        .then(function(response){
-          return response.json();
-        })
-        .then(function(parsedResponse){
-          console.log('parsedResponse', parsedResponse);
-        });
+    fetch(url, options)
+      .then(function(response){
+        return response.json();
+      })
+      .then(function(parsedResponse){
+        console.log('parsedResponse', parsedResponse);
+      });
 
   }
 
@@ -264,8 +264,8 @@ export class Booking {
     thisBooking.hourPicker = new HourPicker(thisBooking.dom.hourPicker);
 
     thisBooking.dom.wrapper.addEventListener('updated', function(){
-    thisBooking.updateDOM();
-  });
+      thisBooking.updateDOM();
+    });
   }
 
 
