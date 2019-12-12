@@ -18,7 +18,7 @@ class BaseWidget {
     const thisWidget = this;
 
     const newValue = thisWidget.parseValue(value);
-    console.log('newValue', newValue);
+    // console.log('newValue', newValue);
 
     /* TODO: Add validation */
     if(newValue != thisWidget.correctValue && thisWidget.isValid(newValue)){
