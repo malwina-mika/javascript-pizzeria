@@ -10,7 +10,6 @@ export class Cart {
     thisCart.products = [];
     // console.log('thisCart.products', thisCart.products);
 
-
     thisCart.getElements(element);
     thisCart.initActions();
 
