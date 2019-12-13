@@ -166,7 +166,7 @@ export class Booking {
       hour: thisBooking.hourPicker.value,
       table: thisBooking.tableId,
       duration: thisBooking.hoursAmount.value,
-      ppl: thisBooking.peopleAmount.value,
+      people: thisBooking.peopleAmount.value,
       starters: [],
       phone: thisBooking.dom.phone.value,
       address: thisBooking.dom.address.value,
@@ -175,6 +175,8 @@ export class Booking {
 
 
     for (let starter of thisBooking.dom.starters) {
+      console.log('starters', thisBooking.dom.starters);
+      console.log('starter', starter);
       if (starter.checked == true) {
         payload.starters.push(starter.value);
       }
@@ -254,6 +256,8 @@ export class Booking {
     thisBooking.dom.phone = thisBooking.dom.wrapper.querySelector(select.booking.phone);
     thisBooking.dom.address = thisBooking.dom.wrapper.querySelector(select.booking.address);
     thisBooking.dom.starters = thisBooking.dom.wrapper.querySelectorAll(select.booking.starters);
+    thisBooking.dom.startersCheck = thisBooking.dom.wrapper.querySelectorAll(select.booking.startersCheck);
+    thisBooking.dom.forbidden = thisBooking.dom.wrapper.querySelector(select.booking.forbidden);
   }
 
   initWidgets() {

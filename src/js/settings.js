@@ -68,6 +68,7 @@ export const select = {
     phone: '.order-confirmation [name="phone"]',
     address: '.order-confirmation [name="address"]',
     starters: '.checkbox [name="starter"]',
+    forbidden: '.order-confirmation .forbidden'
   },
   nav: {
     links: '.main-nav a',

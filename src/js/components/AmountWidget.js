@@ -40,6 +40,7 @@ export class AmountWidget extends BaseWidget{
     const thisWidget = this;
 
     thisWidget.dom.input.addEventListener('change', function(){
+      event.preventDefault();
       thisWidget.value = thisWidget.dom.input.value;
     });
 
