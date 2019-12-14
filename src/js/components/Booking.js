@@ -130,17 +130,16 @@ export class Booking {
     const tableSelectedClass = classNames.booking.tableSelected; //eslint-disable-line no-unused-vars
 
     for(let table of thisBooking.dom.tables) {
-      table.addEventListener('click', function() {
-        // console.log('table', table);
-        if(!table.classList.contains(tableBookedClass)) {
-          table.classList.add(tableBookedClass);
-          thisBooking.tableId = table.getAttribute(settings.booking.tableIdAttribute);
-          // console.log(thisBooking.tableId);
-        }
-        else {
-          return console.log('table is already booked');
-        }
-      });
+        table.addEventListener('click', function() {
+          console.log('table', thisBooking.tableId);
+          if(thisBooking.tableId === undefined) {
+            if(!table.classList.contains(tableBookedClass)) {
+              table.classList.toggle(tableSelectedClass);
+              thisBooking.tableId = table.getAttribute(settings.booking.tableIdAttribute);
+              console.log(thisBooking.tableId);
+            }
+        };
+      })
     }
 
     thisBooking.dom.formBooking.addEventListener('submit', function(event) {
@@ -260,6 +259,8 @@ export class Booking {
         thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId)
       ) {
         table.classList.add(classNames.booking.tableBooked);
+        table.classList.remove(classNames.booking.tableSelected);
+
       } else {
         table.classList.remove(classNames.booking.tableBooked);
       }
