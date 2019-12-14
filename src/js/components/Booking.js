@@ -132,11 +132,20 @@ export class Booking {
     for(let table of thisBooking.dom.tables) {
         table.addEventListener('click', function() {
           console.log('table', thisBooking.tableId);
-          if(thisBooking.tableId === undefined) {
+          if(thisBooking.tableId === undefined || thisBooking.tableId == table.getAttribute(settings.booking.tableIdAttribute)) {
+
             if(!table.classList.contains(tableBookedClass)) {
-              table.classList.toggle(tableSelectedClass);
-              thisBooking.tableId = table.getAttribute(settings.booking.tableIdAttribute);
+
+              if(table.classList.contains(tableSelectedClass)) {
+                console.log('containsSelected');
+              table.classList.remove(tableSelectedClass);
+              thisBooking.tableId = undefined;
               console.log(thisBooking.tableId);
+              } else {
+                console.log('not containsSelected');
+                table.classList.add(tableSelectedClass);
+                thisBooking.tableId = table.getAttribute(settings.booking.tableIdAttribute);
+              }
             }
         };
       })
@@ -204,6 +213,7 @@ export class Booking {
         thisBooking.updateDOM();
       });
 
+      thisBooking.tableId = undefined;
   }
 
   isTableAvaible() {
