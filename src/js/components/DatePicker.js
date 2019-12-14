@@ -14,36 +14,36 @@ export class DatePicker extends BaseWidget{
   }
 
   initPlugin() {
-     const thisWidget = this;
+    const thisWidget = this;
 
-     thisWidget.minDate = new Date(thisWidget.value);
-     thisWidget.maxDate = utils.addDays(
-       thisWidget.minDate,
-       settings.datePicker.maxDaysInFuture
-     );
+    thisWidget.minDate = new Date(thisWidget.value);
+    thisWidget.maxDate = utils.addDays(
+      thisWidget.minDate,
+      settings.datePicker.maxDaysInFuture
+    );
 
-     const options = {
-       defaultDate: thisWidget.minDate,
-       minDate: thisWidget.minDate,
-       maxDate: thisWidget.maxDate,
-       locale: {
-         firstDayOfWeek: 1
-       },
-       disable: [
-         function(date) {
-           // return true to disable
-           return date.getDay() === 1;
-         }
-       ],
-       onChange: function(selectedDates, dateStr, instance) {
-         console.log(selectedDates, dateStr, instance);
-         thisWidget.value = dateStr;
-       }
-     };
+    const options = {
+      defaultDate: thisWidget.minDate,
+      minDate: thisWidget.minDate,
+      maxDate: thisWidget.maxDate,
+      locale: {
+        firstDayOfWeek: 1
+      },
+      disable: [
+        function(date) {
+          // return true to disable
+          return date.getDay() === 1;
+        }
+      ],
+      onChange: function(selectedDates, dateStr, instance) {
+        console.log(selectedDates, dateStr, instance);
+        thisWidget.value = dateStr;
+      }
+    };
 
-     // eslint-disable-next-line no-undef
-     flatpickr(thisWidget.dom.input, options);
-   }
+    // eslint-disable-next-line no-undef
+    flatpickr(thisWidget.dom.input, options);
+  }
 
   parseValue(value) {
     return value;
