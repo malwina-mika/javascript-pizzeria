@@ -17,13 +17,12 @@
   <header class="header">
     <div class="container">
       <div class="header__wrapper">
-        <div class="logo">
+        <a href="#home"<div class="logo">
           <h1 class="logo__title"><span>Mamma</span>Mia!</h1>
           <h2 class="logo__subtitle">the best homemade Italian food</h2>
-        </div>
+        </div> </a>
 
         <div class="main-nav">
-           <a href="#main-page">Main</a>
            <a href="#order">Order</a>
            <a href="#booking">Booking</a>
        </div>
@@ -66,9 +65,117 @@
   </header>
 
   <div id="pages">
-    <section id="main-page">
-      <div class="main-wrapper container"></div>
-    </section>
+    <section id="home">
+     <div class="container main">
+           <div class="services">
+             <div class="row">
+               <div class="box box-1">
+                 <img src="images/main/pizza-1.jpg" alt="pizza-1">
+                 <a href="#order">
+                   <div class="box-title">
+                     <h1 class="h1">ORDER ONLINE</h1>
+                     <p class="hidden">Delicious food delivered to your door</p>
+                   </div>
+                 </a>
+               </div>
+
+               <div class="box box-1">
+                 <img src="images/main/pizza-2.jpg" alt="pizza-2">
+                 <a href="#booking">
+                   <div class="box-title">
+                     <h1 class="h1">BOOK A TABLE</h1>
+                     <p class="hidden">Delicious food in a good place</p>
+                   </div>
+                </a>
+               </div>
+
+               <div class="box box-2">
+                 <div class="box-title">
+                   <h1 class="h1">OPENING HOURS:</h1>
+                   <h2 class="h2">TUE-SUN, 12PM - 12 AM</h2>
+                 </div>
+               </div>
+             </div>
+           </div>
+
+           <div class="reviews">
+             <div class="row">
+               <div class="box box-3">
+                 <img src="images/main/pizza-3.jpg" alt="pizza-3">
+               </div>
+
+               <div class="box box-4">
+                 <div class="slideshow-container">
+                   <div class="slides">
+                     <h2 class="h2">AMAZING SERVICE!</h2>
+                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam egestas viverra tortor, eu ullamcorper dui imperdiet nec. Nunc sed dolor at elit lobortis sodales.</p>
+                     <p>- Margaret Osborne</p>
+                   </div>
+                   <div class="slides">
+                     <h2 class="h2">THE BEST PLACE FOR FAMILY!</h2>
+                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                     <p>- Freddy Cobb</p>
+                   </div>
+                   <div class="slides">
+                     <h2 class="h2">DELICIOUS FOOD!</h2>
+                     <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+                     <p>- Michael Knight</p>
+                   </div>
+                 </div>
+
+                 
+               </div>
+             </div>
+           </div>
+
+           <div class="gallery">
+             <div class="row">
+               <div class="box box-3">
+                 <img src="images/main/pizza-4.jpg" alt="pizza-4">
+                 <div class="box-title">
+                   <i class="fas fa-heart"></i><i class="fas fa-share-alt"></i>
+                 </div>
+               </div>
+               <div class="box box-3">
+                 <img src="images/main/pizza-5.jpg" alt="pizza-5">
+                 <div class="box-title">
+                   <i class="fas fa-heart"></i><i class="fas fa-share-alt"></i>
+                 </div>
+               </div>
+               <div class="box box-3">
+                 <img src="images/main/pizza-6.jpg" alt="pizza-6">
+                 <div class="box-title">
+                   <i class="fas fa-heart"></i><i class="fas fa-share-alt"></i>
+                 </div>
+               </div>
+               <div class="box box-3">
+                 <img src="images/main/pizza-7.jpg" alt="pizza-7">
+                 <div class="box-title">
+                   <i class="fas fa-heart"></i><i class="fas fa-share-alt"></i>
+                 </div>
+                 </div>
+               <div class="box box-3">
+                 <img src="images/main/pizza-8.jpg" alt="pizza-8">
+                 <div class="box-title">
+                   <i class="fas fa-heart"></i><i class="fas fa-share-alt"></i>
+                 </div>
+               </div>
+               <div class="box box-3">
+                 <img src="images/main/pizza-9.jpg" alt="pizza-9">
+                 <div class="box-title">
+                   <i class="fas fa-heart"></i><i class="fas fa-share-alt"></i>
+                 </div>
+               </div>
+             </div>
+           </div>
+
+           <div class="social-media">
+             <a href="#">View more on Instagram</a>
+           </div>
+
+     </div>
+   </section>
+
     <section id="order">
       <div id="product-list" class="product-list container"></div>
     </section>
@@ -251,31 +358,6 @@
     </article> <!-- .product -->
   </script>
 
-  <script id="template-main-page" type="text/x-handlebars-template">
-    <div class="main-page">
-      <div class="row">
-        <div class="link link-order"></div>
-        <div class="link link-booking"></div>
-      </div>
-      <div class="row">
-        <div class="open-hours">
-          <p>opening hours:</p>
-          <p>mon-sun, 10am - 11pm</p>
-        </div>
-      </div>
-      <div class="row">
-          <div class="carusel">
-          </div>
-      </div>
-      <div class="row">
-          <div class="gallery-wrapper"></div>
-      </div>
-      <div class="row">
-          <div class="instagram">
-          </div>
-      </div>
-    </div>
-  </script>
 
   <script id="template-image-element" type="text/x-handlebars-template">
     {{#each image}}

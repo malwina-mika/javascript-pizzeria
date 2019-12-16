@@ -9,6 +9,9 @@ const app = {
 
     thisApp.pages = document.querySelector(select.containerOf.pages).children;
     thisApp.navLinks = document.querySelectorAll(select.nav.links);
+    thisApp.titleLinks = document.querySelectorAll(select.title.links);
+    thisApp.logoLink = document.querySelector(select.logo.link);
+    thisApp.cart = document.querySelector(select.containerOf.cart);
 
     const idFromHash = window.location.hash.replace('#/', '');
 
@@ -21,7 +24,7 @@ const app = {
       }
     }
 
-    thisApp.activatePage(idFromHash);
+    thisApp.activatePage(pageMatchingHash);
 
     for(let link of thisApp.navLinks) {
       link.addEventListener('click', function(event){

@@ -77,6 +77,12 @@ export const select = {
   nav: {
     links: '.main-nav a',
   },
+  title: {
+    links: '.box-1 a',
+  },
+  logo: {
+    link: '.header__wrapper a',
+  },
 };
 
 export const classNames = {
@@ -137,6 +143,6 @@ export const templates = {
   menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
   cartProduct: Handlebars.compile(document.querySelector(select.templateOf.cartProduct).innerHTML),
   bookingWidget: Handlebars.compile(document.querySelector(select.templateOf.bookingWidget).innerHTML),
-  mainPage: Handlebars.compile(document.querySelector(select.templateOf.mainPage).innerHTML),
-  image: Handlebars.compile(document.querySelector(select.templateOf.image).innerHTML),
+  // mainPage: Handlebars.compile(document.querySelector(select.templateOf.mainPage).innerHTML),
+  // image: Handlebars.compile(document.querySelector(select.templateOf.image).innerHTML),
 };

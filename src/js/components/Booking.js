@@ -201,6 +201,7 @@ export class Booking {
         return response.json();
       })
       .then(function(parsedResponse){
+        console.log(parsedResponse);
         thisBooking.dom.forbidden.innerHTML = 'Stolik został zarezerwowany!';
         thisBooking.makeBooked(payload.date, payload.hour, payload.duration, payload.table);
         thisBooking.updateDOM();

@@ -12,6 +12,7 @@
 .logo {
   display: inline-block;
   line-height: 1;
+  color: $color-light;
 
   &__title {
     margin: 0 0 $base-size 0;
@@ -50,6 +51,7 @@
     background: darken($color-dark, 5%);
     border-top-left-radius: $radius;
     border-top-right-radius: $radius;
+    display: none;
 
     &.active {
       background: lighten($color-dark, 75%);
