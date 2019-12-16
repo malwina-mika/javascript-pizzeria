@@ -138,5 +138,5 @@ export const templates = {
   cartProduct: Handlebars.compile(document.querySelector(select.templateOf.cartProduct).innerHTML),
   bookingWidget: Handlebars.compile(document.querySelector(select.templateOf.bookingWidget).innerHTML),
   mainPage: Handlebars.compile(document.querySelector(select.templateOf.mainPage).innerHTML),
- image: Handlebars.compile(document.querySelector(select.templateOf.image).innerHTML),
+  image: Handlebars.compile(document.querySelector(select.templateOf.image).innerHTML),
 };

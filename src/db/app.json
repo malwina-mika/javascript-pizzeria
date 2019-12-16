@@ -238,7 +238,7 @@
     "id": 4,
     "date": "2019-12-20",
     "hour": "13:00",
-    "table": 2,
+    "table": 1,
     "repeat": false,
     "duration": 4,
     "people": 3,
@@ -248,9 +248,9 @@
     "id": 5,
     "date": "2019-12-12",
     "hour": "18:00",
-    "table": 2,
+    "table": 3,
     "repeat": "daily",
-    "duration": 2,
+    "duration": 8,
     "people": 3,
     "starters": ["lemonWater"]
   }
@@ -258,13 +258,13 @@
   ],
   "booking":[
     {
-      "id": 1,
-      "date": "2019-12-13",
-      "hour": "16:00",
-      "table": 1,
-      "duration": 3,
-      "people": 4,
-      "starters": ["water"]
+      "id": 6,
+      "date": "2019-12-18",
+      "hour": "18:00",
+      "table": 2,
+      "duration": 2,
+      "people": 3,
+      "starters": ["lemonWater"]
     }
   ]
 }

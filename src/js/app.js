@@ -62,12 +62,12 @@ const app = {
 
   },
 
-  initMain: function() {
-    const thisApp = this;
+  // initMain: function() {
+  //   const thisApp = this;
 
-    const mainPageElem = document.querySelector(select.containerOf.mainPage);
-    thisApp.main = new MainPage(mainPageElem);
-  },
+  // const mainPageElem = document.querySelector(select.containerOf.mainPage);
+  // thisApp.main = new MainPage(mainPageElem); //eslint-disable-line no-undef
+  // },
 
   initMenu: function() {
     const thisApp = this;
@@ -119,7 +119,7 @@ const app = {
     thisApp.initData();
     thisApp.initCart();
     thisApp.initBooking();
-    thisApp.initMain();
+    // thisApp.initMain();
 
   },
 };

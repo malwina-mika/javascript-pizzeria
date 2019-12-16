@@ -136,7 +136,6 @@ export class Booking {
             if(table.classList.contains(tableSelectedClass)) {
               table.classList.remove(tableSelectedClass);
               thisBooking.tableId = undefined;
-              console.log(thisBooking.tableId);
             } else {
               table.classList.add(tableSelectedClass);
               thisBooking.tableId = table.getAttribute(settings.booking.tableIdAttribute);
@@ -155,7 +154,6 @@ export class Booking {
           thisBooking.sendOrder();
         } else {
           thisBooking.dom.forbidden.innerHTML = 'Rezerwacja nie jest możliwa w wybranym przedziale czasowym';
-          console.log('Submit- thisBooking.tableId', thisBooking.tableId);
         }
 
       }
@@ -203,7 +201,6 @@ export class Booking {
         return response.json();
       })
       .then(function(parsedResponse){
-        console.log('parsedResponse', parsedResponse);
         thisBooking.dom.forbidden.innerHTML = 'Stolik został zarezerwowany!';
         thisBooking.makeBooked(payload.date, payload.hour, payload.duration, payload.table);
         thisBooking.updateDOM();
@@ -220,13 +217,9 @@ export class Booking {
     let isTableAvaible = true;
 
     for(let i = thisBooking.hour; i < endHour; i += 0.5) {
-      console.log('i, date, tableId, hour, hourAmount, endHour', i, thisBooking.date,
-        thisBooking.tableId, thisBooking.hour,  thisBooking.hoursAmount.value, endHour);
-      console.log('thisBooking.booked[i]', thisBooking.booked[thisBooking.date][i]);
       if(
         thisBooking.booked[thisBooking.date][i].includes(parseInt(thisBooking.tableId))
       ) {
-        console.log('thisBooking.tableId', thisBooking.tableId);
         isTableAvaible = false;
       }
     }
