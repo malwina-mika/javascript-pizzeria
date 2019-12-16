@@ -1,3 +1,148 @@
+
+.wrapper {
+  padding: ($base-size * 3);
+}
+
 .main {
+  margin-top: ($base-size * 4);
   background-color: #fff;
+  border-radius: $radius;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: space-between;
+}
+
+.box {
+  position: relative;
+  border-radius: 6px;
+}
+
+.box-1 {
+  flex: 0 0 49%;
+  width: 100%;
+  height: 130px;
+}
+
+.box-2 {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 130px;
+  background-color: $color-main;
+}
+
+.services {
+  margin-bottom: ($base-size * 8);
+
+  .row {
+    height: 270px;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    overflow: hidden;
+    position: absolute;
+  }
+
+  .box-title {
+    position: absolute;
+    text-align: center;
+    color: $color-light;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+
+    p {
+      opacity: 0;
+      transition: $transition;
+    }
+
+    &:hover p{
+      opacity: 1;
+    }
+
+  }
+
+}
+
+img {
+  border-radius: $radius;
+  padding-bottom: 10px;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+// reviews
+
+.box-3 {
+  flex: 0 0 32%;
+}
+
+.box-4 {
+  flex: 0 0 62%;
+}
+
+//gallery
+
+.gallery {
+  .row {
+    height: 410px;
+  }
+
+  .box {
+    height: 190px;
+    position: relative;
+    .box-title {
+      position: absolute;
+      top: 45%;
+      left: 42%;
+      z-index: 9;
+      color: $color-light;
+      opacity: 0;
+      .fas {
+        font-size:  ($base-size * 1.5);
+      }
+      .fa-heart {
+        padding-right: 5px;
+        color: $color-main;
+      }
+
+    }
+    &:hover .box-title{
+      opacity: 1;
+    }
+  }
+
+  .box-3 {
+    flex: 0 0 32%;
+
+    &:hover::after {
+      cursor: pointer;
+      opacity: 0.5;
+    }
+
+    &:hover .box-title {
+      z-index: 1;
+      cursor: pointer;
+    }
+
+    &::after {
+      width: 100%;
+      height: 100%;
+      background-color: $color-dark;
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: $transition;
+    }
+  }
 }

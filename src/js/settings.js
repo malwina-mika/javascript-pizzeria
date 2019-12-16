@@ -75,12 +75,12 @@ export const select = {
     forbidden: '.order-confirmation .forbidden'
   },
   nav: {
-    links: '.main-nav a',
+    links: '.box-1 a',
   },
   title: {
     links: '.box-1 a',
   },
-  logo: {
+  main: {
     link: '.header__wrapper a',
   },
 };

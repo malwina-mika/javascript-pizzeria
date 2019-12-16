@@ -10,8 +10,7 @@ const app = {
     thisApp.pages = document.querySelector(select.containerOf.pages).children;
     thisApp.navLinks = document.querySelectorAll(select.nav.links);
     thisApp.titleLinks = document.querySelectorAll(select.title.links);
-    thisApp.logoLink = document.querySelector(select.logo.link);
-    thisApp.cart = document.querySelector(select.containerOf.cart);
+    thisApp.main = document.querySelector(select.main.link);
 
     const idFromHash = window.location.hash.replace('#/', '');
 
@@ -40,6 +39,15 @@ const app = {
         window.location.hash = '#/' + id;
       });
     }
+
+    thisApp.main.addEventListener('click', function(){
+      const clickedElement = this;
+
+      const id = clickedElement.getAttribute('href').replace('#', '');
+      thisApp.activatePage(id);
+      window.location.hash = '#/' + id;
+    });
+
   },
 
   activatePage: function(pageId) {
