@@ -63,9 +63,6 @@ export class Booking {
         ]);
       })
       .then(function([bookings, eventsCurrent, eventsRepeat]){
-        // console.log('booking', bookings);
-        // console.log('eventsCurrent', eventsCurrent);
-        // console.log('eventsRepeat', eventsRepeat);
         thisBooking.parseData(bookings, eventsCurrent, eventsRepeat);
       });
   }
@@ -130,25 +127,23 @@ export class Booking {
     const tableSelectedClass = classNames.booking.tableSelected; //eslint-disable-line no-unused-vars
 
     for(let table of thisBooking.dom.tables) {
-        table.addEventListener('click', function() {
-          console.log('table', thisBooking.tableId);
-          if(thisBooking.tableId === undefined || thisBooking.tableId == table.getAttribute(settings.booking.tableIdAttribute)) {
 
-            if(!table.classList.contains(tableBookedClass)) {
-
-              if(table.classList.contains(tableSelectedClass)) {
-                console.log('containsSelected');
+      table.addEventListener('click', function() {
+        thisBooking.dom.forbidden.innerHTML = '';
+        // thisBooking.tableId = table.getAttribute(settings.booking.tableIdAttribute);
+        if(thisBooking.tableId == undefined || thisBooking.tableId == table.getAttribute(settings.booking.tableIdAttribute)) {
+          if(!table.classList.contains(tableBookedClass)) {
+            if(table.classList.contains(tableSelectedClass)) {
               table.classList.remove(tableSelectedClass);
               thisBooking.tableId = undefined;
               console.log(thisBooking.tableId);
-              } else {
-                console.log('not containsSelected');
-                table.classList.add(tableSelectedClass);
-                thisBooking.tableId = table.getAttribute(settings.booking.tableIdAttribute);
-              }
+            } else {
+              table.classList.add(tableSelectedClass);
+              thisBooking.tableId = table.getAttribute(settings.booking.tableIdAttribute);
             }
-        };
-      })
+          }
+        }
+      });
     }
 
     thisBooking.dom.formBooking.addEventListener('submit', function(event) {
@@ -160,6 +155,7 @@ export class Booking {
           thisBooking.sendOrder();
         } else {
           thisBooking.dom.forbidden.innerHTML = 'Rezerwacja nie jest możliwa w wybranym przedziale czasowym';
+          console.log('Submit- thisBooking.tableId', thisBooking.tableId);
         }
 
       }
@@ -213,22 +209,20 @@ export class Booking {
         thisBooking.updateDOM();
       });
 
-      thisBooking.tableId = undefined;
+    thisBooking.tableId = undefined;
   }
 
   isTableAvaible() {
     const thisBooking = this;
 
-    const endHour = thisBooking.hour + thisBooking.hoursAmount.correctValue;
+    const endHour = thisBooking.hour + thisBooking.hoursAmount.value;
 
     let isTableAvaible = true;
 
-
     for(let i = thisBooking.hour; i < endHour; i += 0.5) {
-      console.log('i', i, thisBooking.date);
-
-      console.log(('if'), thisBooking.booked[thisBooking.date][i].includes(thisBooking.tableId));
-
+      console.log('i, date, tableId, hour, hourAmount, endHour', i, thisBooking.date,
+        thisBooking.tableId, thisBooking.hour,  thisBooking.hoursAmount.value, endHour);
+      console.log('thisBooking.booked[i]', thisBooking.booked[thisBooking.date][i]);
       if(
         thisBooking.booked[thisBooking.date][i].includes(parseInt(thisBooking.tableId))
       ) {

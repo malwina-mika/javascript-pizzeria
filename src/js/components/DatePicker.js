@@ -35,8 +35,8 @@ export class DatePicker extends BaseWidget{
           return date.getDay() === 1;
         }
       ],
-      onChange: function(selectedDates, dateStr, instance) {
-        console.log(selectedDates, dateStr, instance);
+      onChange: function(selectedDates, dateStr, // eslint-disable-next-line  no-unused-vars
+        instance) {
         thisWidget.value = dateStr;
       }
     };
