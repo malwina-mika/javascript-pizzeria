@@ -23,8 +23,9 @@
         </div>
 
         <div class="main-nav">
-         <a href="#order">Order</a>
-         <a href="#booking">Booking</a>
+           <a href="#main-page">Main</a>
+           <a href="#order">Order</a>
+           <a href="#booking">Booking</a>
        </div>
 
         <div id="cart" class="cart">
@@ -65,6 +66,9 @@
   </header>
 
   <div id="pages">
+    <section id="main-page">
+      <div class="main-wrapper container"></div>
+    </section>
     <section id="order">
       <div id="product-list" class="product-list container"></div>
     </section>
@@ -245,6 +249,38 @@
         </div>
 
     </article> <!-- .product -->
+  </script>
+
+  <script id="template-main-page" type="text/x-handlebars-template">
+    <div class="main-page">
+      <div class="row">
+        <div class="link link-order"></div>
+        <div class="link link-booking"></div>
+      </div>
+      <div class="row">
+        <div class="open-hours">
+          <p>opening hours:</p>
+          <p>mon-sun, 10am - 11pm</p>
+        </div>
+      </div>
+      <div class="row">
+          <div class="carusel">
+          </div>
+      </div>
+      <div class="row">
+          <div class="gallery-wrapper"></div>
+      </div>
+      <div class="row">
+          <div class="instagram">
+          </div>
+      </div>
+    </div>
+  </script>
+
+  <script id="template-image-element" type="text/x-handlebars-template">
+    {{#each image}}
+      <img src="{{source}}" class="" alt="{{alt}}" title="{{title}}">
+    {{/each}}
   </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>

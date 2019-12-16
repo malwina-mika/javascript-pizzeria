@@ -62,6 +62,13 @@ const app = {
 
   },
 
+  initMain: function() {
+    const thisApp = this;
+
+    const mainPageElem = document.querySelector(select.containerOf.mainPage);
+    thisApp.main = new MainPage(mainPageElem);
+  },
+
   initMenu: function() {
     const thisApp = this;
     for(let productData in thisApp.data.products){
@@ -112,6 +119,8 @@ const app = {
     thisApp.initData();
     thisApp.initCart();
     thisApp.initBooking();
+    thisApp.initMain();
+
   },
 };
 
