@@ -163,6 +163,7 @@ export class Booking {
 
   }
 
+
   sendOrder() {
     const thisBooking = this;
     console.log('this booking', thisBooking);
@@ -215,6 +216,8 @@ export class Booking {
 
     const endHour = thisBooking.hour + thisBooking.hoursAmount.value;
 
+    const closeHour = settings.hours.close;
+
     let isTableAvaible = true;
 
     for(let i = thisBooking.hour; i < endHour; i += 0.5) {
@@ -223,7 +226,13 @@ export class Booking {
       ) {
         isTableAvaible = false;
       }
+      if(i > closeHour) {
+        isTableAvaible = false;
+      }
+
     }
+
+
     return isTableAvaible;
   }
 

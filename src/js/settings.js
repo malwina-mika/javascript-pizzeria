@@ -116,6 +116,7 @@ export const settings = {
     defaultValue: 1,
     defaultMin: 1,
     defaultMax: 9,
+    hoursMax: 2,
   },
   datePicker: {
     maxDaysInFuture: 14,
