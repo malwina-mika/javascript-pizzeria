@@ -167,7 +167,10 @@ export class Booking {
 
       }
       thisBooking.updateDOM();
-    
+      window.setTimeout(function() {
+        const forbidden = document.querySelector(select.booking.forbidden);
+        forbidden.innerHTML = '' }
+        , 3000);
 
     });
 
