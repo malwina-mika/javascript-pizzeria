@@ -74,7 +74,7 @@ const app = {
   },
 
   hoverEffect: function() {
-    const css = '.box:hover h1{ margin: 0 }';
+    const css = '.box-1:hover h1{ margin: 0 }';
     const style = document.createElement('style');
 
     if (style.styleSheet) {
@@ -85,11 +85,35 @@ const app = {
 
 document.getElementsByTagName('section')[0].appendChild(style);
 
-
-
-
-
   },
+
+  initSlider: function() {
+    let slideIndex = 0;
+
+    const showSlides = function() {
+
+      const slides = document.querySelectorAll('.slides');
+      const dots = document.querySelectorAll('.dot');
+
+      for(let i=0; i<slides.length; i++) {
+        slides[i].style.display = 'none';
+      }
+
+      for(let i=0; i<dots.length; i++) {
+        dots[i].className = dots[i].className.replace('active', '');
+      }
+
+      slideIndex++;
+      if (slideIndex > slides.length) {slideIndex = 1};
+      slides[slideIndex-1].style.display = 'block';
+      dots[slideIndex-1].className += ' active';
+      setTimeout(showSlides, 3000);
+
+    };
+
+    showSlides();
+ },
+
 
   initMenu: function() {
     const thisApp = this;
@@ -142,6 +166,7 @@ document.getElementsByTagName('section')[0].appendChild(style);
     thisApp.initCart();
     thisApp.initBooking();
     thisApp.hoverEffect();
+    thisApp.initSlider();
     // thisApp.initMain();
 
   },
