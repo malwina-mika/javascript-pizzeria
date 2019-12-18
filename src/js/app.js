@@ -73,12 +73,23 @@ const app = {
 
   },
 
-  // initMain: function() {
-  //   const thisApp = this;
+  hoverEffect: function() {
+    const css = '.box:hover h1{ margin: 0 }';
+    const style = document.createElement('style');
 
-  // const mainPageElem = document.querySelector(select.containerOf.mainPage);
-  // thisApp.main = new MainPage(mainPageElem); //eslint-disable-line no-undef
-  // },
+    if (style.styleSheet) {
+        style.styleSheet.cssText = css;
+    } else {
+        style.appendChild(document.createTextNode(css));
+    }
+
+document.getElementsByTagName('section')[0].appendChild(style);
+
+
+
+
+
+  },
 
   initMenu: function() {
     const thisApp = this;
@@ -130,6 +141,7 @@ const app = {
     thisApp.initData();
     thisApp.initCart();
     thisApp.initBooking();
+    thisApp.hoverEffect();
     // thisApp.initMain();
 
   },
