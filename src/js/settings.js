@@ -32,6 +32,7 @@ export const select = {
   widgets: {
     amount: {
       input: 'input.amount',
+      inputHours: 'input.amount-hours',
       linkDecrease: 'a[href="#less"]',
       linkIncrease: 'a[href="#more"]',
     },
@@ -43,6 +44,7 @@ export const select = {
       wrapper: '.hour-picker',
       input: 'input[type="range"]',
       output: '.output',
+      slider: '.rangeSlider__fill',
     },
   },
   cart: {
@@ -116,7 +118,7 @@ export const settings = {
     defaultValue: 1,
     defaultMin: 1,
     defaultMax: 9,
-    hoursMax: 2,
+    hoursMax: 1,
   },
   datePicker: {
     maxDaysInFuture: 14,

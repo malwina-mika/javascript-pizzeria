@@ -114,9 +114,18 @@ export class Booking {
         thisBooking.booked[date][hourBlock] = [];
       }
 
-      thisBooking.booked[date][hourBlock].push(parseInt(table));
+      // thisBooking.booked[date][hourBlock].push(parseInt(table));
 
-      // console.log('loop', hourBlock);
+      if (typeof table == 'object') {
+        for (let t of table) {
+          thisBooking.booked[date][hourBlock].push(t);
+        }
+      } else {
+        thisBooking.booked[date][hourBlock].push(parseInt(table));
+      }
+
+
+
     }
   }
 
@@ -129,23 +138,23 @@ export class Booking {
     for(let table of thisBooking.dom.tables) {
 
       table.addEventListener('click', function() {
-        thisBooking.dom.forbidden.innerHTML = '';
         // thisBooking.tableId = table.getAttribute(settings.booking.tableIdAttribute);
-        if(thisBooking.tableId == undefined || thisBooking.tableId == table.getAttribute(settings.booking.tableIdAttribute)) {
-          if(!table.classList.contains(tableBookedClass)) {
-            if(table.classList.contains(tableSelectedClass)) {
-              table.classList.remove(tableSelectedClass);
-              thisBooking.tableId = undefined;
-            } else {
-              table.classList.add(tableSelectedClass);
-              thisBooking.tableId = table.getAttribute(settings.booking.tableIdAttribute);
-            }
+        // if(thisBooking.tableId == undefined || thisBooking.tableId == table.getAttribute(settings.booking.tableIdAttribute)) {
+        if(!table.classList.contains(tableBookedClass)) {
+          if(table.classList.contains(tableSelectedClass)) {
+            table.classList.remove(tableSelectedClass);
+            thisBooking.tableId = undefined;
+          } else {
+            table.classList.add(tableSelectedClass);
+            thisBooking.tableId = table.getAttribute(settings.booking.tableIdAttribute);
           }
         }
+        // }
       });
     }
 
     thisBooking.dom.formBooking.addEventListener('submit', function(event) {
+      thisBooking.dom.forbidden.innerHTML = '';
       event.preventDefault();
       if(thisBooking.tableId == undefined) {
         thisBooking.dom.forbidden.innerHTML = 'Wybierz stolik!';
@@ -158,6 +167,7 @@ export class Booking {
 
       }
       thisBooking.updateDOM();
+    
 
     });
 
@@ -173,7 +183,8 @@ export class Booking {
     const payload = {
       date: thisBooking.datePicker.value,
       hour: thisBooking.hourPicker.value,
-      table: thisBooking.tableId,
+      // table: thisBooking.tableId,
+      table: [],
       duration: thisBooking.hoursAmount.value,
       people: thisBooking.peopleAmount.value,
       starters: [],
@@ -184,8 +195,18 @@ export class Booking {
 
 
     for (let starter of thisBooking.dom.starters) {
-      if (starter.checked == true) {
+      if (starter.checked) {
         payload.starters.push(starter.value);
+      }
+    }
+
+    for (let table of thisBooking.dom.tables) {
+      if (table.classList.contains(classNames.booking.tableClicked)) {
+        thisBooking.tableId = table.getAttribute(settings.booking.tableIdAttribute);
+        if (!isNaN(thisBooking.tableId)) {
+          thisBooking.tableId = parseInt(thisBooking.tableId);
+        }
+        payload.table.push(thisBooking.tableId);
       }
     }
 
@@ -301,7 +322,7 @@ export class Booking {
   initWidgets() {
     const thisBooking = this;
     thisBooking.peopleAmount = new AmountWidget(thisBooking.dom.peopleAmount);
-    thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.hoursAmount);
+    thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.hoursAmount, true);
     thisBooking.datePicker = new DatePicker(thisBooking.dom.datePicker);
     thisBooking.hourPicker = new HourPicker(thisBooking.dom.hourPicker);
 
@@ -309,7 +330,20 @@ export class Booking {
     thisBooking.dom.wrapper.addEventListener('updated', function(){
       thisBooking.updateDOM();
     });
+
+    for(let table of thisBooking.dom.tables) {
+      table.addEventListener('click', function() {
+
+        if (!table.classList.contains(classNames.booking.tableBooked)) { //jeśli obiekt table nie zawiera klasy booked
+          let tableId = table.getAttribute(settings.booking.tableIdAttribute);
+          if (!isNaN(tableId)) {
+            tableId = parseInt(tableId);
+          }
+          table.classList.toggle(classNames.booking.tableClicked);
+          thisBooking.selectTable = tableId;
+        }
+
+      });
+    }
   }
-
-
 }

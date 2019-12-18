@@ -2,9 +2,9 @@ import {settings, select} from '../settings.js';
 import BaseWidget from './BaseWidget.js';
 
 export class AmountWidget extends BaseWidget{
-  constructor(element) {
+  constructor(element, isHourWidget) {
     super(element, settings.amountWidget.defaultValue);
-
+    console.log(isHourWidget);
     const thisWidget = this;
 
     thisWidget.getElements(element);
@@ -13,7 +13,6 @@ export class AmountWidget extends BaseWidget{
 
     thisWidget.renderValue();
 
-    // console.log('amountWidget', thisWidget);
   }
 
   getElements() {
@@ -22,12 +21,22 @@ export class AmountWidget extends BaseWidget{
     thisWidget.dom.input = thisWidget.dom.wrapper.querySelector(select.widgets.amount.input);
     thisWidget.dom.linkDecrease = thisWidget.dom.wrapper.querySelector(select.widgets.amount.linkDecrease);
     thisWidget.dom.linkIncrease = thisWidget.dom.wrapper.querySelector(select.widgets.amount.linkIncrease);
+    thisWidget.dom.isHourWidget = thisWidget.dom.wrapper.querySelector(select.widgets.amount.inputHours);
+
   }
 
   isValid(value) {
-    return !isNaN(value)
-    &&value>=settings.amountWidget.defaultMin
-    && value<=settings.amountWidget.defaultMax;
+    const thisWidget = this;
+    const AvailableTime = 5;
+
+    if(thisWidget.dom.isHourWidget) {
+      return value>=0.5 && value<= AvailableTime;
+    } else {
+
+      return !isNaN(value)
+      && value>=settings.amountWidget.defaultMin
+      && value<=settings.amountWidget.defaultMax;
+    }
   }
 
   renderValue() {
@@ -42,7 +51,9 @@ export class AmountWidget extends BaseWidget{
     thisWidget.dom.input.addEventListener('change', function(){
       event.preventDefault();
       thisWidget.value = thisWidget.dom.input.value;
+      thisWidget.dom.forbidden.innerHTML = '';
     });
+
 
     thisWidget.dom.linkDecrease.addEventListener('click', function(){
       event.preventDefault();
