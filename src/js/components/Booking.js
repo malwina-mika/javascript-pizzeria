@@ -46,7 +46,7 @@ export class Booking {
       eventsRepeat:   settings.db.url + '/' + settings.db.event
                                       + '?' + params.eventsRepeat.join('&'),
     };
-    // console.log('getData urls', urls);
+
     Promise.all([
       fetch(urls.booking),
       fetch(urls.eventsCurrent),
@@ -74,12 +74,12 @@ export class Booking {
 
     for(let item of bookings) {
       thisBooking.makeBooked(item.date, item.hour, item.duration, item.table);
-      // console.log('booking- item', item);
+
     }
 
     for(let item of eventsCurrent) {
       thisBooking.makeBooked(item.date, item.hour, item.duration, item.table);
-      // console.log('eventsCurrent- item', item);
+
     }
 
     const minDate = thisBooking.datePicker.minDate;
@@ -91,7 +91,6 @@ export class Booking {
           thisBooking.makeBooked(utils.dateToStr(loopDate), item.hour, item.duration, item.table);
         }
       }
-      // console.log('eventsRepeat- item', item);
     }
 
     console.log('thisBooking.booked', thisBooking.booked);
@@ -114,68 +113,80 @@ export class Booking {
         thisBooking.booked[date][hourBlock] = [];
       }
 
-      // thisBooking.booked[date][hourBlock].push(parseInt(table));
-
       if (typeof table == 'object') {
         for (let t of table) {
           thisBooking.booked[date][hourBlock].push(t);
         }
       } else {
-        thisBooking.booked[date][hourBlock].push(parseInt(table));
+        thisBooking.booked[date][hourBlock].push(table);
       }
-
-
-
     }
+    thisBooking.updateDOM();
   }
 
   initActions() {
     const thisBooking = this;
 
     const tableBookedClass = classNames.booking.tableBooked;
-    const tableSelectedClass = classNames.booking.tableSelected; //eslint-disable-line no-unused-vars
+    const tableSelectedClass = classNames.booking.tableSelected;
 
     for(let table of thisBooking.dom.tables) {
 
       table.addEventListener('click', function() {
-        // thisBooking.tableId = table.getAttribute(settings.booking.tableIdAttribute);
-        // if(thisBooking.tableId == undefined || thisBooking.tableId == table.getAttribute(settings.booking.tableIdAttribute)) {
         if(!table.classList.contains(tableBookedClass)) {
           if(table.classList.contains(tableSelectedClass)) {
             table.classList.remove(tableSelectedClass);
-            thisBooking.tableId = undefined;
           } else {
             table.classList.add(tableSelectedClass);
             thisBooking.tableId = table.getAttribute(settings.booking.tableIdAttribute);
           }
         }
-        // }
       });
     }
 
+    for (let table of thisBooking.dom.tables) {
+      table.addEventListener('click', function() {
+
+      if(thisBooking.tableId == table.getAttribute(settings.booking.tableIdAttribute)) {
+        if (!table.classList.contains(classNames.booking.tableBooked)) {
+          let tableId = table.getAttribute(settings.booking.tableIdAttribute);
+          if (!isNaN(tableId)) {
+            tableId = parseInt(tableId);
+          }
+          table.classList.add(classNames.booking.tableSelectedClass);
+          thisBooking.tableId = table.getAttribute(settings.booking.tableIdAttribute);
+        }
+      }
+    });
+  }
+
     thisBooking.dom.formBooking.addEventListener('submit', function(event) {
-      thisBooking.dom.forbidden.innerHTML = '';
+
       event.preventDefault();
       if(thisBooking.tableId == undefined) {
         thisBooking.dom.forbidden.innerHTML = 'Wybierz stolik!';
       } else {
         if(thisBooking.isTableAvaible()){
+          thisBooking.dom.forbidden.classList.add(classNames.booking.forbiddenBlue);
+          thisBooking.dom.forbidden.innerHTML = 'Rezerwacja została dokonana!';
+          window.setTimeout(function() {
+            thisBooking.dom.forbidden.classList.remove(classNames.booking.forbiddenBlue); }
+          , 2000);
           thisBooking.sendOrder();
         } else {
-          thisBooking.dom.forbidden.innerHTML = 'Rezerwacja nie jest możliwa w wybranym przedziale czasowym';
+            thisBooking.dom.forbidden.innerHTML = 'Rezerwacja nie jest możliwa w wybranym przedziale czasowym';
         }
-
       }
+
       thisBooking.updateDOM();
       window.setTimeout(function() {
         const forbidden = document.querySelector(select.booking.forbidden);
-        forbidden.innerHTML = '' }
-        , 3000);
+        forbidden.innerHTML = ''; }
+      , 2000);
 
     });
 
   }
-
 
   sendOrder() {
     const thisBooking = this;
@@ -204,13 +215,15 @@ export class Booking {
     }
 
     for (let table of thisBooking.dom.tables) {
-      if (table.classList.contains(classNames.booking.tableClicked)) {
+      if (table.classList.contains(classNames.booking.tableSelectedClass)) {
         thisBooking.tableId = table.getAttribute(settings.booking.tableIdAttribute);
+        console.log('tableiD', thisBooking.tableId );
+        console.log('table', table );
         if (!isNaN(thisBooking.tableId)) {
           thisBooking.tableId = parseInt(thisBooking.tableId);
         }
         payload.table.push(thisBooking.tableId);
-      }
+      };
     }
 
     const options = {
@@ -227,7 +240,7 @@ export class Booking {
       })
       .then(function(parsedResponse){
         console.log(parsedResponse);
-        thisBooking.dom.forbidden.innerHTML = 'Stolik został zarezerwowany!';
+
         thisBooking.makeBooked(payload.date, payload.hour, payload.duration, payload.table);
         thisBooking.updateDOM();
       });
@@ -244,18 +257,17 @@ export class Booking {
 
     let isTableAvaible = true;
 
-    for(let i = thisBooking.hour; i < endHour; i += 0.5) {
+    for(let i = thisBooking.hour; i < endHour; i += 1) {
       if(
         thisBooking.booked[thisBooking.date][i].includes(parseInt(thisBooking.tableId))
       ) {
-        isTableAvaible = false;
+        thisBooking.booked[thisBooking.date][i];
+        return isTableAvaible = false;
       }
-      if(i > closeHour) {
-        isTableAvaible = false;
+      if(endHour >= closeHour) {
+        return isTableAvaible = false;
       }
-
     }
-
 
     return isTableAvaible;
   }
@@ -282,7 +294,6 @@ export class Booking {
       if(!isNaN(tableId)){
         tableId = parseInt(tableId);
       }
-
 
       if(
         !allAvailable
@@ -333,20 +344,5 @@ export class Booking {
     thisBooking.dom.wrapper.addEventListener('updated', function(){
       thisBooking.updateDOM();
     });
-
-    for(let table of thisBooking.dom.tables) {
-      table.addEventListener('click', function() {
-
-        if (!table.classList.contains(classNames.booking.tableBooked)) { //jeśli obiekt table nie zawiera klasy booked
-          let tableId = table.getAttribute(settings.booking.tableIdAttribute);
-          if (!isNaN(tableId)) {
-            tableId = parseInt(tableId);
-          }
-          table.classList.toggle(classNames.booking.tableClicked);
-          thisBooking.selectTable = tableId;
-        }
-
-      });
-    }
   }
 }

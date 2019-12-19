@@ -204,7 +204,7 @@
           <div class="hour-picker range-slider">
               <div class="output"></div>
               <label class="booking-option-title">Pick a time</label>
-            <input type="range" name="hour" value="12" min="12" max="24" step="0.5">
+            <input type="range" name="hour" value="12" min="12" max="24" step="1">
           </div>
         </div>
         <div class="floor-plan">
@@ -227,7 +227,7 @@
             Hours
             <div class="widget-amount hours-amount"> <!-- widget-amount -->
               <a class="btn-quantity" href="#less"><i class="fas fa-minus"></i></a>
-              <input class="amount amount-hours" type="text" name="hours" value="0.5">
+              <input class="amount amount-hours" type="text" name="hours" value="1">
               <a class="btn-quantity" href="#more"><i class="fas fa-plus"></i></a>
             </div>
           </label>
@@ -249,11 +249,12 @@
             </div>
           </div>
         </div>
+        <div class="forbidden"></div>
         <div class="order-confirmation">
+
           <input type="tel" name="phone" placeholder="Your phone" required>
           <input type="text" name="address" placeholder="Your address" required>
           <button type="submit" class="btn-secondary">Book table</button>
-          <div class="forbidden"></div>
         </div>
       </form>
     </div>

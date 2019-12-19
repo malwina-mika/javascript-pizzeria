@@ -2,9 +2,9 @@ import {settings, select} from '../settings.js';
 import BaseWidget from './BaseWidget.js';
 
 export class AmountWidget extends BaseWidget{
-  constructor(element, isHourWidget) {
+  constructor(element, isHourWidget) {  //eslint-disable-line no-unused-vars
     super(element, settings.amountWidget.defaultValue);
-    console.log(isHourWidget);
+
     const thisWidget = this;
 
     thisWidget.getElements(element);
@@ -51,7 +51,6 @@ export class AmountWidget extends BaseWidget{
     thisWidget.dom.input.addEventListener('change', function(){
       event.preventDefault();
       thisWidget.value = thisWidget.dom.input.value;
-      thisWidget.dom.forbidden.innerHTML = '';
     });
 
 

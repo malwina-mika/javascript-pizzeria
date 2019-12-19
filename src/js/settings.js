@@ -74,7 +74,7 @@ export const select = {
     phone: '.order-confirmation [name="phone"]',
     address: '.order-confirmation [name="address"]',
     starters: '.checkbox [name="starter"]',
-    forbidden: '.order-confirmation .forbidden'
+    forbidden: '.forbidden',
   },
   nav: {
     links: '.box-1 a',
@@ -99,6 +99,7 @@ export const classNames = {
     loading: 'loading',
     tableBooked: 'booked',
     tableSelected: 'selected',
+    forbiddenBlue: 'forbidden-blue',
 
   },
   nav: {

@@ -41,6 +41,20 @@
   text-align: center;
 }
 
+.forbidden {
+  height: 35px;
+  margin-bottom: 15px;
+  padding: 5px;
+  font-size: ($base-size * 1.5);
+  color: $color-main;
+  display: block;
+
+}
+
+.forbidden-blue {
+  color: #2980b9;
+}
+
 .time-picker {
   @include flex(row, flex-start, space-between);
   margin: 0 0 ($base-size * 4) 0;
