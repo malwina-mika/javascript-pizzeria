@@ -144,21 +144,7 @@ export class Booking {
       });
     }
 
-    for (let table of thisBooking.dom.tables) {
-      table.addEventListener('click', function() {
 
-      if(thisBooking.tableId == table.getAttribute(settings.booking.tableIdAttribute)) {
-        if (!table.classList.contains(classNames.booking.tableBooked)) {
-          let tableId = table.getAttribute(settings.booking.tableIdAttribute);
-          if (!isNaN(tableId)) {
-            tableId = parseInt(tableId);
-          }
-          table.classList.add(classNames.booking.tableSelectedClass);
-          thisBooking.tableId = table.getAttribute(settings.booking.tableIdAttribute);
-        }
-      }
-    });
-  }
 
     thisBooking.dom.formBooking.addEventListener('submit', function(event) {
 
@@ -174,7 +160,7 @@ export class Booking {
           , 2000);
           thisBooking.sendOrder();
         } else {
-            thisBooking.dom.forbidden.innerHTML = 'Rezerwacja nie jest możliwa w wybranym przedziale czasowym';
+          thisBooking.dom.forbidden.innerHTML = 'Rezerwacja nie jest możliwa w wybranym przedziale czasowym';
         }
       }
 
@@ -215,7 +201,7 @@ export class Booking {
     }
 
     for (let table of thisBooking.dom.tables) {
-      if (table.classList.contains(classNames.booking.tableSelectedClass)) {
+      if (table.classList.contains(classNames.booking.tableSelected)) {
         thisBooking.tableId = table.getAttribute(settings.booking.tableIdAttribute);
         console.log('tableiD', thisBooking.tableId );
         console.log('table', table );
@@ -223,7 +209,7 @@ export class Booking {
           thisBooking.tableId = parseInt(thisBooking.tableId);
         }
         payload.table.push(thisBooking.tableId);
-      };
+      }
     }
 
     const options = {
