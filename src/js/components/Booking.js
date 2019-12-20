@@ -171,7 +171,6 @@ export class Booking {
       , 2000);
 
     });
-
   }
 
   sendOrder() {
